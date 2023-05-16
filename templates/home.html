@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container-fluid">
+        <div class="row">
+                <div class="col-md-12">
+                        <div class="banner">
+                                <h5 class="banner-text">TODO</h5>
+                        </div>
+                </div>
+        </div>
+</div>
+<div class="container">
+        <div class="row">
+                <div class="col-md-6">
+                <form method="post" class="mb-3 shadow">
+                        {% csrf_token %}
+                        <div class="form-group">
+                                <input type="text" class="form-control" name="name" placeholder="Taskname">
+                        </div>
+                        <div class="form-group">
+                                <input type="text" class="form-control" name="priority" placeholder="Priority">
+                        </div>
+                        <div class="form-group">
+                                <input type="date" class="form-control" name="date" placeholder="Date">
+                        </div>
+                        <input type="submit" class="btn btn-success">
+                </form>
+                </div>
+                <div class="col-md-6">
+                        {% for i in detail %}
+                        <div class="card">
+                                <div class="card-body">
+                                        <h5 class="card-title">{{i.name}}</h5>
+                                        <p><b>{{i.priority}}</b></p>
+                                        <p><b>{{i.date}}</b></p>
+                                        <a class="btn btn-danger" href="{% url 'delete' i.id %}">Done</a>
+                                        <a class="btn btn-danger" href="{% url 'edit' i.id %}">Edit</a>
+                                        <br>
+                                </div>
+                        </div>
+                        {% endfor %}
+                </div>
+        </div>
+</div>
+
+
+{% endblock %}
